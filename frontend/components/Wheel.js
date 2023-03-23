@@ -1,17 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import { moveClockwise } from '../state/action-creators';
+import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
 
 
 
 export function Wheel(props) {
-
-  // const wheelMove = () => {
-  //   props.wheel === 1 ? 
-  // }
-
-  console.log(props);
+  console.log(props.wheel);
   return (
     <div id="wrapper">
       <div id="wheel">
@@ -23,7 +18,7 @@ export function Wheel(props) {
         <div className={props.wheel === 5 ? "cog active" : "cog"} style={{ "--i": 5 }}>{props.wheel === 5 ? 'B' : null}</div>{/* --i is a custom CSS property, no need to touch that nor the style object */} 
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn">Counter clockwise</button>
+        <button id="counterClockwiseBtn" onClick={() => props.moveCounterClockwise(props.wheel - 1 > -1 ? props.wheel - 1 : 5)} >Counter clockwise</button>
         <button id="clockwiseBtn" onClick={() => props.moveClockwise(props.wheel + 1 < 6 ? props.wheel + 1 : 0)}>Clockwise</button>
       </div>
     </div>
@@ -33,5 +28,6 @@ export function Wheel(props) {
 export default connect(st => ({ 
   wheel: st.wheel 
 }), {
-  moveClockwise
+  moveClockwise, 
+  moveCounterClockwise
 })(Wheel);

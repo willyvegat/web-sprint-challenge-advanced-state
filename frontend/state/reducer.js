@@ -7,6 +7,8 @@ function wheel(state = initialWheelState, action) {
   switch(action.type){
     case types.MOVE_CLOCKWISE:
       return action.payload
+    case types.MOVE_COUNTERCLOCKWISE:
+      return action.payload  
     default:
       return state
   }

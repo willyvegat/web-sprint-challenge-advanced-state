@@ -7,7 +7,9 @@ export function moveClockwise(num) {
   return { type: types.MOVE_CLOCKWISE, payload: num}
 }
 
-export function moveCounterClockwise() { }
+export function moveCounterClockwise(num) { 
+  return { type: types.MOVE_COUNTERCLOCKWISE, payload: num}
+}
 
 export function selectAnswer() { }
 
