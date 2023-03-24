@@ -50,8 +50,9 @@ export function postAnswer({quiz_id, answer_id}) {
     // - Dispatch the fetching of the next quiz
     axios.post("http://localhost:9000/api/quiz/answer", {quiz_id, answer_id})
       .then(res => {
-        dispatch(fetchQuiz())
-        console.log(res.data.message);
+        dispatch(resetForm());
+        dispatch(setMessage(res.data.message));
+        dispatch(fetchQuiz());
       })
       .catch(err => {
         console.log(err);
