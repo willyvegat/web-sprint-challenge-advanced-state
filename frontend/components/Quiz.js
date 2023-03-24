@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuiz } from '../state/action-creators'
+import { fetchQuiz, selectAnswer } from '../state/action-creators'
 
 export function Quiz(props) {
-  // console.log(props);
+  console.log(props);
   useEffect(() =>{
     props.fetchQuiz()
   }, [])
@@ -14,20 +14,20 @@ export function Quiz(props) {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
         props.quiz ? (
           <>
-            <h2>What is a closure?</h2>
+            <h2>{props.quiz.question}</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected">
-                A function
+              <div className={props.quiz.answers[0].text ? "answer selected" : "answer"}>
+                {props.quiz.answers[0].text}
                 <button>
                   SELECTED
                 </button>
               </div>
 
-              <div className="answer">
-                An elephant
-                <button>
-                  Select
+              <div className={props.quiz.answers[1].text ? "answer selected" : "answer"}>
+              {props.quiz.answers[1].text}
+                <button onClick={() => selectAnswer(props.quiz.answers[1].answer_id)}>
+                  {props.selectedAnswer.answer_id === props.quiz.answers[1].answer_id ? "SELECTED" : "Select"}
                 </button>
               </div>
             </div>
@@ -41,7 +41,9 @@ export function Quiz(props) {
 }
 
 export default connect(st => ({
-  quiz: st.quiz
+  quiz: st.quiz,
+  selectedAnswer: st.selectedAnswer
 }), {
-  fetchQuiz
+  fetchQuiz,
+  selectAnswer
 })(Quiz);
