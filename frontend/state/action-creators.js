@@ -23,7 +23,12 @@ export function setQuiz(quiz) {
   return { type: types.SET_QUIZ_INTO_STATE, payload: quiz}
 }
 
-export function inputChange() { }
+export function inputChange({ name, value }) {
+  console.log(value);
+  const payload = { name, value }
+  // console.log("from inside the action creator")
+  return { type: types.INPUT_CHANGE, payload }
+ }
 
 export function resetForm() {
   return { type: types.RESET_FORM }
@@ -59,11 +64,15 @@ export function postAnswer({quiz_id, answer_id}) {
       })
   }
 }
-export function postQuiz() {
+export function postQuiz({ question_text, true_answer_text, false_answer_text }) {
   return function (dispatch) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
+    axios.post('http://localhost:9000/api/quiz/new', { question_text, true_answer_text, false_answer_text })
+      .then(res => {
+        console.log(res)
+      })
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

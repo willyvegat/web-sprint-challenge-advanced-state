@@ -60,6 +60,11 @@ function form(state = initialFormState, action) {
   switch(action.type){
     case types.RESET_FORM:
       return initialFormState
+    case types.INPUT_CHANGE: {
+      // console.log(action.type)
+      const { name, value } = action.payload
+      return { ...state, [name]: value }  
+    }
     default:
       return state
   }
