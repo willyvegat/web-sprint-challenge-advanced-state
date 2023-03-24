@@ -37,22 +37,18 @@ export function resetForm() {
 // ❗ Async action creators
 export function fetchQuiz() {
   return function (dispatch) {
-    dispatch(resetForm());
+    // dispatch(resetForm());
     axios.get('http://localhost:9000/api/quiz/next')
       .then(res => {
         dispatch(setQuiz(res.data));
       })
       .catch(err => {
-        console.log(err);
+        dispatch(setMessage(err.message));
       })
   }
 }
 export function postAnswer({quiz_id, answer_id}) {
   return function (dispatch) {
-    // On successful POST:
-    // - Dispatch an action to reset the selected answer state
-    // - Dispatch an action to set the server message to state
-    // - Dispatch the fetching of the next quiz
     axios.post("http://localhost:9000/api/quiz/answer", {quiz_id, answer_id})
       .then(res => {
         dispatch(resetForm());
@@ -60,22 +56,15 @@ export function postAnswer({quiz_id, answer_id}) {
         dispatch(fetchQuiz());
       })
       .catch(err => {
-        console.log(err);
+        dispatch(setMessage(err.message));
       })
   }
 }
 export function postQuiz({ question_text, true_answer_text, false_answer_text }) {
   return function (dispatch) {
-    // On successful POST:
-    // - Dispatch the correct message to the the appropriate state
-    // - Dispatch the resetting of the form
     axios.post('http://localhost:9000/api/quiz/new', { question_text, true_answer_text, false_answer_text })
       .then(res => {
-        // console.log(res);
-        // setQuiz(res.data)
         dispatch(setMessage(`Congrats: "${question_text}" is a great question!`))
-        // dispatch(setMessage(`${res.request.status} ${res.request.statusText}`))
-        // dispatch(setQuiz(res.data));
         dispatch(resetForm());
       })
       .catch(err => {
