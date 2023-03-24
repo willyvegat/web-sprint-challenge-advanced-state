@@ -15,7 +15,9 @@ export function selectAnswer(answer_id) {
   return { type: types.SET_SELECTED_ANSWER, payload: answer_id}
 }
 
-export function setMessage() { }
+export function setMessage(message) { 
+  return { type: types.SET_INFO_MESSAGE, payload: message}
+}
 
 export function setQuiz(quiz) { 
   return { type: types.SET_QUIZ_INTO_STATE, payload: quiz}
@@ -46,6 +48,7 @@ export function postAnswer() {
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
+    // axios.post()
   }
 }
 export function postQuiz() {
