@@ -21,7 +21,7 @@ export function Quiz(props) {
             <h2>{props.quiz.question}</h2>
 
             <div id="quizAnswers">
-              <div className={props.quiz.answers[0].text ? "answer selected" : "answer"}>
+              <div className={props.selectedAnswer.answer_id === props.quiz.answers[0].answer_id ? "answer selected" : "answer"}>
                 {props.quiz.answers[0].text}
                 <button onClick={() => props.selectAnswer(props.quiz.answers[0].answer_id)}>
                 {props.selectedAnswer.answer_id !== props.quiz.answers[0].answer_id ? "Select" : "SELECTED"}
