@@ -24,7 +24,7 @@ export function setQuiz(quiz) {
 }
 
 export function inputChange({ name, value }) {
-  console.log(value);
+  // console.log(value);
   const payload = { name, value }
   // console.log("from inside the action creator")
   return { type: types.INPUT_CHANGE, payload }
@@ -71,7 +71,15 @@ export function postQuiz({ question_text, true_answer_text, false_answer_text })
     // - Dispatch the resetting of the form
     axios.post('http://localhost:9000/api/quiz/new', { question_text, true_answer_text, false_answer_text })
       .then(res => {
-        console.log(res)
+        // console.log(res);
+        // setQuiz(res.data)
+        dispatch(setMessage(`Congrats: "${question_text}" is a great question!`))
+        // dispatch(setMessage(`${res.request.status} ${res.request.statusText}`))
+        // dispatch(setQuiz(res.data));
+        dispatch(resetForm());
+      })
+      .catch(err => {
+        console.log(err);
       })
   }
 }
