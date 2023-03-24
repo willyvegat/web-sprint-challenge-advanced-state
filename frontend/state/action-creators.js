@@ -79,7 +79,7 @@ export function postQuiz({ question_text, true_answer_text, false_answer_text })
         dispatch(resetForm());
       })
       .catch(err => {
-        console.log(err);
+        dispatch(setMessage(err.response.data.message));
       })
   }
 }
