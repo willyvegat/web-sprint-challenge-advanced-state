@@ -32,6 +32,8 @@ const initialSelectedAnswerState = {
 }
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch(action.type){
+    case types.RESET_FORM:
+      return initialSelectedAnswerState
     case types.SET_SELECTED_ANSWER:
       return { ...state, answer_id: action.payload }
     default:
