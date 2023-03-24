@@ -10,7 +10,7 @@ export function Quiz(props) {
   }
 
   useEffect(() =>{
-    props.fetchQuiz()
+    if (!props.selectedAnswer.answer_id) props.fetchQuiz()
   }, [])
 
   return (
